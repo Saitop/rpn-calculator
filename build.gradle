@@ -47,3 +47,12 @@ sourceSets {
 repositories {
     jcenter()
 }
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Executable Jar of RPN Caculator',
+                'Implementation-Version': version,
+                'Main-Class': 'com.airwallex.RpnCalculator'
+    }
+    baseName = project.name
+}
