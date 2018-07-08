@@ -1,0 +1,49 @@
+
+plugins {
+    // Apply the java plugin to add support for Java
+    id 'java'
+
+    // Apply the application plugin to add support for building an application
+    id 'application'
+}
+
+group 'com.airwallex'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+// Define the main class for the application
+mainClassName = 'com.airwallex.RpnCalculator'
+
+dependencies {
+    compile 'com.google.guava:guava:23.0'
+    testCompile 'junit:junit:4.12'
+}
+
+run {
+    standardInput = System.in
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+        }
+        resources {
+            srcDir 'src/main/resources'
+        }
+    }
+
+    test {
+        java {
+            srcDir 'src/test/java'
+        }
+        resources {
+            srcDir 'src/test/resources'
+        }
+    }
+}
+
+repositories {
+    jcenter()
+}
