@@ -7,8 +7,8 @@ public class RpnCalculatorTest {
 
     @Test
     public void testAppHasAGreeting() {
-        RpnCalculator classUnderTest = new RpnCalculator();
-        assertNotNull("app should have a greeting", classUnderTest.getGreeting());
+        RpnCalculator rpnCalculator = new RpnCalculator();
+        assertNotNull(rpnCalculator);
     }
 
 }

@@ -14,18 +14,22 @@ public class RpnCalculator {
         Scanner scan = new Scanner(System.in);
         while(scan.hasNextLine()) {
             String input = scan.nextLine();
+            exit(input);
+            System.out.println("===================================");
             System.out.println("Result as below:");
-            System.out.println("----------------------------------");
+            //todo: make it real
             System.out.printf("%s \n", input);
-            System.out.println("----------------------------------");
-
-            if (":q".equals(input)) {
-                System.out.println("Exit!");
-                System.exit(0);
-            }
+            System.out.println("===================================");
 
         }
 
+    }
+
+    private void exit(String input) {
+        if (":q".equals(input)) {
+            System.out.println("Exit!");
+            System.exit(0);
+        }
     }
 
     private void construction() {
