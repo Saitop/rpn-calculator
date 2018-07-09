@@ -1,7 +1,6 @@
 package com.airwallex;
 
 import java.util.Scanner;
-import java.util.Stack;
 
 public class RpnCalculator {
 
@@ -15,15 +14,18 @@ public class RpnCalculator {
     private void run() {
         instruction();
         Scanner scan = new Scanner(System.in);
+        RpnStack rpnStack = new RpnStack();
 
         while(scan.hasNextLine()) {
             String input = scan.nextLine();
             exit(input);
             System.out.println("===================================");
-            System.out.println("Result as below:");
+            System.out.println("Result:");
             System.out.println("-----------------------------------");
             //todo: make it real
             System.out.printf("Input:\t%s\t\n", input);
+            rpnStack.process(input);
+            System.out.printf("Stack:\t%s\t\n", rpnStack.printNumberStack());
 
         }
 
