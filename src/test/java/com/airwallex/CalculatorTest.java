@@ -19,4 +19,18 @@ public class CalculatorTest {
         calculator.process("5.0123456789111 2.123332");
         assertEquals("5.0123456789 2.123332", calculator.printNumberStack());
     }
+
+    @Test
+    public void shouldReturnSquareRoot() {
+        Calculator calculator = new Calculator();
+        calculator.process("2 sqrt");
+        assertEquals("1.4142135623", calculator.printNumberStack());
+    }
+
+    @Test
+    public void shouldAddRealNumberDecimal() {
+        Calculator calculator = new Calculator();
+        calculator.process("5.0123456789111 2.123332 + ");
+        assertEquals("7.1356776789", calculator.printNumberStack());
+    }
 }

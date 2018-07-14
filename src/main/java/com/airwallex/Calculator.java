@@ -2,6 +2,7 @@ package com.airwallex;
 
 import com.airwallex.entity.Token;
 
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Stack;
@@ -42,7 +43,8 @@ public class Calculator {
 
 
     public String printNumberStack() {
-        DecimalFormat fmt = new DecimalFormat("0.##########");
+        DecimalFormat fmt = new DecimalFormat("#.##########");
+        fmt.setRoundingMode(RoundingMode.DOWN);
         return numberStack.stream()
                 .map(token -> Double.valueOf(token.getValue()))
                 .map(fmt::format)
