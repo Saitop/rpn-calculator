@@ -2,13 +2,13 @@ package com.airwallex;
 
 import java.util.Scanner;
 
-public class RpnCalculator {
+public class CalculatorApplication {
 
     private static final String EXIT_CODE = ":q";
 
     public static void main(String[] args) {
-        final RpnCalculator rpnCalculator = new RpnCalculator();
-        rpnCalculator.run();
+        final CalculatorApplication calculatorApplication = new CalculatorApplication();
+        calculatorApplication.run();
     }
 
     private void run() {

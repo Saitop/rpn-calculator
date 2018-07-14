@@ -13,7 +13,7 @@ version '1.0-SNAPSHOT'
 sourceCompatibility = 1.8
 
 // Define the main class for the application
-mainClassName = 'com.airwallex.RpnCalculator'
+mainClassName = 'com.airwallex.CalculatorApplication'
 
 dependencies {
     testCompile 'junit:junit:4.12'
@@ -51,7 +51,7 @@ jar {
     manifest {
         attributes 'Implementation-Title': 'Executable Jar of RPN Caculator',
                 'Implementation-Version': version,
-                'Main-Class': 'com.airwallex.RpnCalculator'
+                'Main-Class': 'com.airwallex.CalculatorApplication'
     }
     baseName = project.name
 }
