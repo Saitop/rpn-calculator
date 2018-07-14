@@ -16,7 +16,6 @@ sourceCompatibility = 1.8
 mainClassName = 'com.airwallex.RpnCalculator'
 
 dependencies {
-    compile 'com.google.guava:guava:23.0'
     testCompile 'junit:junit:4.12'
 }
 

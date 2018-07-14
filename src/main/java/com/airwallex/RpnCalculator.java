@@ -14,18 +14,15 @@ public class RpnCalculator {
     private void run() {
         instruction();
         Scanner scan = new Scanner(System.in);
-        RpnStack rpnStack = new RpnStack();
+        Calculator calculator = new Calculator();
 
         while(scan.hasNextLine()) {
             String input = scan.nextLine();
             exit(input);
-            System.out.println("===================================");
-            System.out.println("Result:");
             System.out.println("-----------------------------------");
-            //todo: make it real
             System.out.printf("Input:\t%s\t\n", input);
-            rpnStack.process(input);
-            System.out.printf("Stack:\t%s\t\n", rpnStack.printNumberStack());
+            calculator.process(input);
+            System.out.printf("Stack:\t%s\t\n", calculator.printNumberStack());
 
         }
 
@@ -42,7 +39,8 @@ public class RpnCalculator {
         System.out.println("*******************************************************");
         System.out.println("Welcome to RPN Calculator!");
         System.out.println("Enter ':q' to exit the program");
-        System.out.println("Available operators are +, -, *, /, sqrt, undo, clear");
+        System.out.println("Inputs should be real number or operators");
+        System.out.println("Available operators are:  +, -, *, /, sqrt, undo, clear");
         System.out.println("*******************************************************");
 
     }
