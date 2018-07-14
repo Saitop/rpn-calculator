@@ -28,6 +28,13 @@ public class CalculatorTest {
     }
 
     @Test
+    public void shouldReturnSquareRootWithClearToken() {
+        Calculator calculator = new Calculator();
+        calculator.process("2 sqrt clear 9 sqrt");
+        assertEquals("3", calculator.printNumberStack());
+    }
+
+    @Test
     public void shouldAddRealNumberDecimal() {
         Calculator calculator = new Calculator();
         calculator.process("5.0123456789111 2.123332 + ");

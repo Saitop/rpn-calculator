@@ -17,20 +17,23 @@ public class Processor {
         List<Token> result = new ArrayList<>();
         String[] inputStrings = input.split("\\s+");
         for (String inputString : inputStrings) {
-            if (isNumber(inputString)) {
-                result.add(new NumberToken(inputString));
-            } else if(inputString.equals("+")){
-                result.add(new AdditionToken(inputString));
-            } else if(inputString.equals("-")){
-                result.add(new SubtractionToken(inputString));
-            } else if(inputString.equals("sqrt")){
-                result.add(new SquareRootToken(inputString));
-            } else if(inputString.equals("/")){
-                result.add(new DivisionToken(inputString));
-            } else if(inputString.equals("*")){
-                result.add(new MultiplicationToken(inputString));
-            } else if(inputString.equals("clear")){
-                result.add(new ClearToken(inputString));
+            String trimmedString = inputString.trim();
+            if (isNumber(trimmedString)) {
+                result.add(new NumberToken(trimmedString));
+            } else if (trimmedString.equals("+")) {
+                result.add(new AdditionToken(trimmedString));
+            } else if (trimmedString.equals("-")) {
+                result.add(new SubtractionToken(trimmedString));
+            } else if (trimmedString.equals("sqrt")) {
+                result.add(new SquareRootToken(trimmedString));
+            } else if (trimmedString.equals("/")) {
+                result.add(new DivisionToken(trimmedString));
+            } else if (trimmedString.equals("*")) {
+                result.add(new MultiplicationToken(trimmedString));
+            } else if (trimmedString.equals("undo")) {
+                result.add(new UndoToken(trimmedString));
+            } else if (trimmedString.equals("clear")) {
+                result.add(new ClearToken(trimmedString));
             }
         }
         return result;

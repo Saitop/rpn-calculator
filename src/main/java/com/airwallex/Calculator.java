@@ -1,42 +1,49 @@
 package com.airwallex;
 
-import com.airwallex.entity.Token;
+import com.airwallex.entity.*;
+import com.airwallex.exception.CalculatorException;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
-import java.util.List;
 import java.util.Stack;
 import java.util.stream.Collectors;
 
 public class Calculator {
     private final Processor processor;
     private Stack<Token> numberStack = new Stack<>();
-    private Stack<Token> operatorStack = new Stack<>();
 
     public Calculator() {
         this.processor = new Processor();
     }
 
     public void process(String input) {
-        List<Token> tokens = processor.processInputString(input);
-        classifyToken(tokens);
-
-        while (!operatorStack.empty()) {
-            final Token operator = operatorStack.pop();
-            try {
-                operator.execute(numberStack);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        }
-    }
-
-    private void classifyToken(List<Token> tokens) {
-        for (Token token: tokens) {
-            if (token.getType().equals("NumberToken")) {
+        String[] inputStrings = input.split("\\s+");
+        for (String inputString : inputStrings) {
+            String trimmedString = inputString.trim();
+            Token token = null;
+            if (processor.isNumber(trimmedString)) {
+                token = new NumberToken(trimmedString);
                 numberStack.push(token);
-            } else {
-                operatorStack.push(token);
+            } else if (trimmedString.equals("+")) {
+                token = new AdditionToken(trimmedString);
+            } else if (trimmedString.equals("-")) {
+                token = new SubtractionToken(trimmedString);
+            } else if (trimmedString.equals("sqrt")) {
+                token = new SquareRootToken(trimmedString);
+            } else if (trimmedString.equals("/")) {
+                token = new DivisionToken(trimmedString);
+            } else if (trimmedString.equals("*")) {
+                token = new MultiplicationToken(trimmedString);
+            } else if (trimmedString.equals("undo")) {
+                token = new UndoToken(trimmedString);
+            } else if (trimmedString.equals("clear")) {
+                token = new ClearToken(trimmedString);
+            }
+            try {
+                assert token != null;
+                token.execute(numberStack);
+            } catch (CalculatorException e) {
+                System.out.println(e.getMessage());
             }
         }
     }
