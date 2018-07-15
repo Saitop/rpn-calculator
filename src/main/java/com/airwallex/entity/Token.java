@@ -6,7 +6,7 @@ import com.airwallex.exception.CalculatorException;
 import java.util.Stack;
 
 public abstract class Token {
-        private String type;
+    private String type;
     private String value;
 
     public abstract void execute(Stack<Token> tokens, Stack<Step> cachedNumbers, int currentIndex) throws CalculatorException;

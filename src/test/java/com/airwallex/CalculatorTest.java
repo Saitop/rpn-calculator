@@ -115,7 +115,6 @@ public class CalculatorTest {
         assertEquals("120", calculator.printNumberStack());
     }
 
-
     @Test
     public void shouldReturnWarningWhenParametersInsufficient() throws CalculatorException {
         expectedException.expect(CalculatorException.class);
@@ -123,7 +122,15 @@ public class CalculatorTest {
         Calculator calculator = new Calculator();
         calculator.process("1 2 3 * 5 + * * 6 5");
         assertEquals("11", calculator.printNumberStack());
+    }
 
+    @Test
+    public void shouldReturnWarningWhenParametersInsufficientWithDivision() throws CalculatorException {
+        expectedException.expect(CalculatorException.class);
+        expectedException.expectMessage("operator / (position: 3): insufficient parameters");
+        Calculator calculator = new Calculator();
+        calculator.process("1 /");
+        assertEquals("1", calculator.printNumberStack());
     }
 
 }
