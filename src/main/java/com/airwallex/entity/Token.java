@@ -9,7 +9,7 @@ public abstract class Token {
         private String type;
     private String value;
 
-    public abstract void execute(Stack<Token> tokens, Stack<Step> cachedNumbers) throws CalculatorException;
+    public abstract void execute(Stack<Token> tokens, Stack<Step> cachedNumbers, int currentIndex) throws CalculatorException;
 
     public Token(String type, String value) {
         this.type = type;

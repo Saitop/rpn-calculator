@@ -12,7 +12,11 @@ public class DivisionToken extends Token {
     }
 
     @Override
-    public void execute(Stack<Token> tokens, Stack<Step> cachedNumbers) throws CalculatorException {
+    public void execute(Stack<Token> tokens, Stack<Step> cachedNumbers, int currentIndex) throws CalculatorException {
+        if (tokens.size() < 2) {
+            throw new CalculatorException(
+                    String.format("operator %s (position: %d): insufficient parameters", this.getValue(), currentIndex));
+        }
         final Token secondNumber = tokens.pop();
         final Token firstNumber = tokens.pop();
         if ("0".equals(secondNumber.getValue())) {

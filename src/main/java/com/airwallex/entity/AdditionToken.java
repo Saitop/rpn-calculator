@@ -12,7 +12,7 @@ public class AdditionToken extends Token {
     }
 
     @Override
-    public void execute(Stack<Token> tokens, Stack<Step> cachedNumbers) {
+    public void execute(Stack<Token> tokens, Stack<Step> cachedNumbers, int currentIndex) {
         final Token secondNumber = tokens.pop();
         final Token firstNumber = tokens.pop();
         final Double result = Double.valueOf(firstNumber.getValue()) + Double.valueOf(secondNumber.getValue());

@@ -13,7 +13,7 @@ public class SquareRootToken extends Token {
     }
 
     @Override
-    public void execute(Stack<Token> tokens, Stack<Step> cachedNumbers) {
+    public void execute(Stack<Token> tokens, Stack<Step> cachedNumbers, int currentIndex) {
         final Token firstNumber = tokens.pop();
         final Double result = sqrt(Double.valueOf(firstNumber.getValue()));
         tokens.push(new NumberToken(result.toString()));

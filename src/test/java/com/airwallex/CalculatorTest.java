@@ -1,34 +1,39 @@
 package com.airwallex;
 
+import com.airwallex.exception.CalculatorException;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import static org.junit.Assert.*;
 
 public class CalculatorTest {
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
 
     @Test
-    public void shouldReturnNumberStack() {
+    public void shouldReturnNumberStack() throws CalculatorException {
         Calculator calculator = new Calculator();
         calculator.process("5 2");
         assertEquals("5 2", calculator.printNumberStack());
     }
 
     @Test
-    public void shouldProcess10DecimalPlacesAndReturnNumberStack() {
+    public void shouldProcess10DecimalPlacesAndReturnNumberStack() throws CalculatorException {
         Calculator calculator = new Calculator();
         calculator.process("5.0123456789111 2.123332");
         assertEquals("5.0123456789 2.123332", calculator.printNumberStack());
     }
 
     @Test
-    public void shouldReturnSquareRoot() {
+    public void shouldReturnSquareRoot() throws CalculatorException {
         Calculator calculator = new Calculator();
         calculator.process("2 sqrt");
         assertEquals("1.4142135623", calculator.printNumberStack());
     }
 
     @Test
-    public void shouldReturnSquareRootWithClearToken() {
+    public void shouldReturnSquareRootWithClearToken() throws CalculatorException {
         Calculator calculator = new Calculator();
         calculator.process("2 sqrt");
         assertEquals("1.4142135623", calculator.printNumberStack());
@@ -38,7 +43,7 @@ public class CalculatorTest {
     }
 
     @Test
-    public void shouldReturnCorrectValueWhenInputMultipleOperator() {
+    public void shouldReturnCorrectValueWhenInputMultipleOperator() throws CalculatorException {
         Calculator calculator = new Calculator();
         calculator.process("5 2 -");
         assertEquals("3", calculator.printNumberStack());
@@ -52,14 +57,14 @@ public class CalculatorTest {
     }
 
     @Test
-    public void shouldAddRealNumberDecimal() {
+    public void shouldAddRealNumberDecimal() throws CalculatorException {
         Calculator calculator = new Calculator();
         calculator.process("5.0123456789111 2.123332 + ");
         assertEquals("7.1356776789", calculator.printNumberStack());
     }
 
     @Test
-    public void shouldReturnCorrectValueWhitUndoOperator() {
+    public void shouldReturnCorrectValueWhitUndoOperator() throws CalculatorException {
         Calculator calculator = new Calculator();
         calculator.process("5 4 3 2");
         assertEquals("5 4 3 2", calculator.printNumberStack());
@@ -75,7 +80,7 @@ public class CalculatorTest {
     }
 
     @Test
-    public void shouldReturnCorrectValueWhitDivisionOperation() {
+    public void shouldReturnCorrectValueWhitDivisionOperation() throws CalculatorException {
         Calculator calculator = new Calculator();
         calculator.process("7 12 2 /");
         assertEquals("7 6", calculator.printNumberStack());
@@ -88,7 +93,7 @@ public class CalculatorTest {
     }
 
     @Test
-    public void shouldReturnCorrectValueWhitNegativeResult() {
+    public void shouldReturnCorrectValueWhitNegativeResult() throws CalculatorException {
         Calculator calculator = new Calculator();
         calculator.process("1 2 3 4 5");
         assertEquals("1 2 3 4 5", calculator.printNumberStack());
@@ -101,7 +106,7 @@ public class CalculatorTest {
     }
 
     @Test
-    public void shouldReturnCorrectValueWhitContinuousOperation() {
+    public void shouldReturnCorrectValueWhitContinuousOperation() throws CalculatorException {
         Calculator calculator = new Calculator();
         calculator.process("1 2 3 4 5");
         assertEquals("1 2 3 4 5", calculator.printNumberStack());
@@ -109,4 +114,16 @@ public class CalculatorTest {
         calculator.process("* * * * ");
         assertEquals("120", calculator.printNumberStack());
     }
+
+
+    @Test
+    public void shouldReturnWarningWhenParametersInsufficient() throws CalculatorException {
+        expectedException.expect(CalculatorException.class);
+        expectedException.expectMessage("operator * (position: 15): insufficient parameters");
+        Calculator calculator = new Calculator();
+        calculator.process("1 2 3 * 5 + * * 6 5");
+        assertEquals("11", calculator.printNumberStack());
+
+    }
+
 }

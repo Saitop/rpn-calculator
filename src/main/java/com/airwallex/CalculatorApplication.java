@@ -1,5 +1,7 @@
 package com.airwallex;
 
+import com.airwallex.exception.CalculatorException;
+
 import java.util.Scanner;
 
 public class CalculatorApplication {
@@ -21,7 +23,11 @@ public class CalculatorApplication {
             exit(input);
             System.out.println("-----------------------------------");
             System.out.printf("Input:\t%s\t\n", input);
-            calculator.process(input);
+            try {
+                calculator.process(input);
+            } catch (CalculatorException e) {
+                System.out.println(e.getMessage());
+            }
             System.out.printf("Stack:\t%s\t\n", calculator.printNumberStack());
 
         }

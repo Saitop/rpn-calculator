@@ -14,15 +14,16 @@ public class Calculator {
     private Stack<Token> numberStack = new Stack<>();
     private Stack<Token> operatorStack = new Stack<>();
     private Stack<Step> cachedSteps = new Stack<>();
-
+    private int currentIndex = 0;
 
     public Calculator() {
         this.processor = new Processor();
     }
 
-    public void process(String input) {
+    public void process(String input) throws CalculatorException {
         String[] inputStrings = input.split("\\s+");
         for (String inputString : inputStrings) {
+            currentIndex += inputString.length();
             String trimmedString = inputString.trim();
             Token token = null;
             if (processor.isNumber(trimmedString)) {
@@ -51,36 +52,9 @@ public class Calculator {
                 operatorStack.push(token);
             }
 
-            try {
-                if (token != null ) {
-                    token.execute(numberStack, cachedSteps);
-                }
-            } catch (CalculatorException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-    }
-
-//    public void process(String input) {
-//        List<Token> tokens = processor.processInputString(input);
-//        classifyToken(tokens);
-//
-//        while (!operatorStack.empty()) {
-//            final Token operator = operatorStack.pop();
-//            try {
-//                operator.execute(numberStack);
-//            } catch (Exception e) {
-//                System.out.println(e.getMessage());
-//            }
-//        }
-//    }
-
-    private void classifyToken(List<Token> tokens) {
-        for (Token token: tokens) {
-            if (token.getType().equals("NumberToken")) {
-                numberStack.push(token);
-            } else {
-                operatorStack.push(token);
+            if (token != null) {
+                token.execute(numberStack, cachedSteps, currentIndex);
+                currentIndex += 1;
             }
         }
     }
