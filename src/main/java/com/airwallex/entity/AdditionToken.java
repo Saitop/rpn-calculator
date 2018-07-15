@@ -1,7 +1,7 @@
 package com.airwallex.entity;
 
 import com.airwallex.Step;
-import com.airwallex.exception.CalculatorException;
+import com.airwallex.exception.InsufficientParamsException;
 
 import java.util.Arrays;
 import java.util.Stack;
@@ -13,9 +13,9 @@ public class AdditionToken extends Token {
     }
 
     @Override
-    public void execute(Stack<Token> tokens, Stack<Step> cachedNumbers) throws CalculatorException {
+    public void execute(Stack<Token> tokens, Stack<Step> cachedNumbers) throws InsufficientParamsException {
         if (tokens.size() < 2) {
-            throw new CalculatorException();
+            throw new InsufficientParamsException();
         }
         final Token secondNumber = tokens.pop();
         final Token firstNumber = tokens.pop();

@@ -2,6 +2,8 @@ package com.airwallex;
 
 import com.airwallex.entity.Token;
 import com.airwallex.exception.CalculatorException;
+import com.airwallex.exception.InsufficientParamsException;
+import com.airwallex.exception.InvalidInputException;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
@@ -25,21 +27,22 @@ public class Calculator {
         for (String inputString : inputStrings) {
             currentIndex += inputString.length();
             String trimmedString = inputString.trim();
-            Token token = processor.createToken(trimmedString);
-            if (token != null) {
+            Token token = null;
+            try {
+                token = processor.createToken(trimmedString);
                 if(token.getType().equals("Number")) {
                     numberStack.push(token);
                 } else if(token.getType().equals("Operation")) {
                     operatorStack.push(token);
                 }
-                try {
-                    token.execute(numberStack, cachedSteps);
-                } catch (CalculatorException e) {
-                    throw new CalculatorException(String.format("operator %s (position: %d): insufficient parameters",
-                            token.getValue(), currentIndex));
-                }
-                currentIndex += 1;
+                token.execute(numberStack, cachedSteps);
+            } catch (InsufficientParamsException e) {
+                throw new CalculatorException(String.format("operator %s (position: %d): insufficient parameters",
+                        token.getValue(), currentIndex));
+            } catch (InvalidInputException e) {
+                throw new CalculatorException(String.format("Invalid input: %s", trimmedString));
             }
+            currentIndex += 1;
         }
     }
 

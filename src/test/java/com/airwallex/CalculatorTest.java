@@ -1,6 +1,7 @@
 package com.airwallex;
 
 import com.airwallex.exception.CalculatorException;
+import com.airwallex.exception.InvalidInputException;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -131,6 +132,14 @@ public class CalculatorTest {
         Calculator calculator = new Calculator();
         calculator.process("1 /");
         assertEquals("1", calculator.printNumberStack());
+    }
+
+    @Test
+    public void shouldReturnWarningWhenDividedByZero() throws CalculatorException {
+        expectedException.expect(CalculatorException.class);
+        expectedException.expectMessage("Cannot divide by 0.");
+        Calculator calculator = new Calculator();
+        calculator.process("8 9 2 0 /");
     }
 
 }

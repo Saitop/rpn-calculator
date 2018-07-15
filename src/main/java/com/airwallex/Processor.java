@@ -1,6 +1,7 @@
 package com.airwallex;
 
 import com.airwallex.entity.*;
+import com.airwallex.exception.InvalidInputException;
 
 import java.util.regex.Pattern;
 
@@ -11,8 +12,8 @@ public class Processor {
         return Pattern.matches(numberRegex, inputString);
     }
 
-    public Token createToken(String inputString) {
-        Token token = null;
+    public Token createToken(String inputString) throws InvalidInputException {
+        Token token;
         if (isNumber(inputString)) {
             token = new NumberToken(inputString);
         } else if (inputString.equals("+")) {
@@ -29,6 +30,8 @@ public class Processor {
             token = new UndoToken();
         } else if (inputString.equals("clear")) {
             token = new ClearToken();
+        } else {
+            throw new InvalidInputException();
         }
         return token;
     }
