@@ -73,4 +73,18 @@ public class CalculatorTest {
         calculator.process("undo");
         assertEquals("20 5", calculator.printNumberStack());
     }
+
+    @Test
+    public void shouldReturnCorrectValueWhitDivisionOperation() {
+        Calculator calculator = new Calculator();
+        calculator.process("7 12 2 /");
+        assertEquals("7 6", calculator.printNumberStack());
+
+        calculator.process("*");
+        assertEquals("42", calculator.printNumberStack());
+
+        calculator.process("4 /");
+        assertEquals("10.5", calculator.printNumberStack());
+
+    }
 }
