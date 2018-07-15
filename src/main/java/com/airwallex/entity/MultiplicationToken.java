@@ -8,15 +8,14 @@ import java.util.Stack;
 
 public class MultiplicationToken extends Token {
 
-    public MultiplicationToken(String value) {
-        super("MultiplicationToken", value);
+    public MultiplicationToken() {
+        super("Operation", "*");
     }
 
     @Override
-    public void execute(Stack<Token> tokens, Stack<Step> cachedSteps, int currentIndex) throws CalculatorException {
+    public void execute(Stack<Token> tokens, Stack<Step> cachedSteps) throws CalculatorException {
         if (tokens.size() < 2) {
-            throw new CalculatorException(
-                    String.format("operator %s (position: %d): insufficient parameters", this.getValue(), currentIndex));
+            throw new CalculatorException();
         }
         Token secondNumber = tokens.pop();
         Token firstNumber = tokens.pop();

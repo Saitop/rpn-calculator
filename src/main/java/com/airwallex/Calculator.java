@@ -1,6 +1,6 @@
 package com.airwallex;
 
-import com.airwallex.entity.*;
+import com.airwallex.entity.Token;
 import com.airwallex.exception.CalculatorException;
 
 import java.math.RoundingMode;
@@ -25,35 +25,19 @@ public class Calculator {
         for (String inputString : inputStrings) {
             currentIndex += inputString.length();
             String trimmedString = inputString.trim();
-            Token token = null;
-            if (processor.isNumber(trimmedString)) {
-                token = new NumberToken(trimmedString);
-                numberStack.push(token);
-            } else if (trimmedString.equals("+")) {
-                token = new AdditionToken(trimmedString);
-                operatorStack.push(token);
-            } else if (trimmedString.equals("-")) {
-                token = new SubtractionToken(trimmedString);
-                operatorStack.push(token);
-            } else if (trimmedString.equals("sqrt")) {
-                token = new SquareRootToken(trimmedString);
-                operatorStack.push(token);
-            } else if (trimmedString.equals("/")) {
-                token = new DivisionToken(trimmedString);
-                operatorStack.push(token);
-            } else if (trimmedString.equals("*")) {
-                token = new MultiplicationToken(trimmedString);
-                operatorStack.push(token);
-            } else if (trimmedString.equals("undo")) {
-                token = new UndoToken(trimmedString);
-                operatorStack.push(token);
-            } else if (trimmedString.equals("clear")) {
-                token = new ClearToken(trimmedString);
-                operatorStack.push(token);
-            }
-
+            Token token = processor.createToken(trimmedString);
             if (token != null) {
-                token.execute(numberStack, cachedSteps, currentIndex);
+                if(token.getType().equals("Number")) {
+                    numberStack.push(token);
+                } else if(token.getType().equals("Operation")) {
+                    operatorStack.push(token);
+                }
+                try {
+                    token.execute(numberStack, cachedSteps);
+                } catch (CalculatorException e) {
+                    throw new CalculatorException(String.format("operator %s (position: %d): insufficient parameters",
+                            token.getValue(), currentIndex));
+                }
                 currentIndex += 1;
             }
         }

@@ -9,15 +9,14 @@ import java.util.Stack;
 import static java.lang.Math.sqrt;
 
 public class SquareRootToken extends Token {
-    public SquareRootToken(String value) {
-        super("SquareRootToken", value);
+    public SquareRootToken() {
+        super("Operation", "sqrt");
     }
 
     @Override
-    public void execute(Stack<Token> tokens, Stack<Step> cachedNumbers, int currentIndex) throws CalculatorException {
+    public void execute(Stack<Token> tokens, Stack<Step> cachedNumbers) throws CalculatorException {
         if (tokens.size() < 1) {
-            throw new CalculatorException(
-                    String.format("operator %s (position: %d): insufficient parameters", this.getValue(), currentIndex));
+            throw new CalculatorException();
         }
         final Token firstNumber = tokens.pop();
         final Double result = sqrt(Double.valueOf(firstNumber.getValue()));
