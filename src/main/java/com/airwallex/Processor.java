@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 public class Processor {
 
     public boolean isNumber(String inputString) {
-        String numberRegex = "\\d+(\\.\\d+)?";
+        String numberRegex = "(\\+|-)?\\d+(\\.\\d+)?";
         return Pattern.matches(numberRegex, inputString);
     }
 

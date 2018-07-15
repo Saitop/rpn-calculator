@@ -142,4 +142,17 @@ public class CalculatorTest {
         calculator.process("8 9 2 0 /");
     }
 
+    @Test
+    public void shouldReturnCorrectNumberWhenNumberWithSign() throws CalculatorException {
+        Calculator calculator = new Calculator();
+        calculator.process("8 -9 +2 0 ");
+        assertEquals("8 -9 2 0", calculator.printNumberStack());
+    }
+
+    @Test
+    public void shouldReturnCorrectValueWhenCalculateNumberWithSign() throws CalculatorException {
+        Calculator calculator = new Calculator();
+        calculator.process("8 -9 +2 0 + + + ");
+        assertEquals("1", calculator.printNumberStack());
+    }
 }
