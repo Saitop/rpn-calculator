@@ -28,19 +28,19 @@ public class Processor {
         }
         if (isNumber(inputString)) {
             return new NumberToken(inputString);
-        } else if (inputString.equals("+")) {
+        } else if ("+".equals(inputString)) {
             return new AdditionToken();
-        } else if (inputString.equals("-")) {
+        } else if ("-".equals(inputString)) {
             return new SubtractionToken();
-        } else if (inputString.equals("sqrt")) {
+        } else if ("sqrt".equals(inputString)) {
             return new SquareRootToken();
-        } else if (inputString.equals("/")) {
+        } else if ("/".equals(inputString)) {
             return new DivisionToken();
-        } else if (inputString.equals("*")) {
+        } else if ("*".equals(inputString)) {
             return new MultiplicationToken();
-        } else if (inputString.equals("undo")) {
+        } else if ("undo".equals(inputString)) {
             return new UndoToken();
-        } else if (inputString.equals("clear")) {
+        } else if ("clear".equals(inputString)) {
             return new ClearToken();
         } else {
             return null;
