@@ -1,7 +1,9 @@
 package com.airwallex.entity;
 
+import com.airwallex.Step;
 import com.airwallex.exception.CalculatorException;
 
+import java.util.Arrays;
 import java.util.Stack;
 
 public class DivisionToken extends Token {
@@ -10,7 +12,7 @@ public class DivisionToken extends Token {
     }
 
     @Override
-    public void execute(Stack<Token> tokens) throws CalculatorException {
+    public void execute(Stack<Token> tokens, Stack<Step> cachedNumbers) throws CalculatorException {
         final Token secondNumber = tokens.pop();
         final Token firstNumber = tokens.pop();
         if ("0".equals(secondNumber.getValue())) {
@@ -18,5 +20,7 @@ public class DivisionToken extends Token {
         }
         final Double result = Double.valueOf(firstNumber.getValue()) / Double.valueOf(secondNumber.getValue());
         tokens.push(new NumberToken(result.toString()));
+        final Step step = new Step(Arrays.asList(firstNumber, secondNumber), this);
+        cachedNumbers.push(step);
     }
 }

@@ -52,6 +52,13 @@ public class CalculatorTest {
     }
 
     @Test
+    public void shouldAddRealNumberDecimal() {
+        Calculator calculator = new Calculator();
+        calculator.process("5.0123456789111 2.123332 + ");
+        assertEquals("7.1356776789", calculator.printNumberStack());
+    }
+
+    @Test
     public void shouldReturnCorrectValueWhitUndoOperator() {
         Calculator calculator = new Calculator();
         calculator.process("5 4 3 2");
@@ -62,12 +69,8 @@ public class CalculatorTest {
 
         calculator.process("5 * ");
         assertEquals("100", calculator.printNumberStack());
-    }
 
-    @Test
-    public void shouldAddRealNumberDecimal() {
-        Calculator calculator = new Calculator();
-        calculator.process("5.0123456789111 2.123332 + ");
-        assertEquals("7.1356776789", calculator.printNumberStack());
+        calculator.process("undo");
+        assertEquals("20 5", calculator.printNumberStack());
     }
 }
