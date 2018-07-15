@@ -85,6 +85,28 @@ public class CalculatorTest {
 
         calculator.process("4 /");
         assertEquals("10.5", calculator.printNumberStack());
+    }
 
+    @Test
+    public void shouldReturnCorrectValueWhitNegativeResult() {
+        Calculator calculator = new Calculator();
+        calculator.process("1 2 3 4 5");
+        assertEquals("1 2 3 4 5", calculator.printNumberStack());
+
+        calculator.process("*");
+        assertEquals("1 2 3 20", calculator.printNumberStack());
+
+        calculator.process("clear 3 4 -");
+        assertEquals("-1", calculator.printNumberStack());
+    }
+
+    @Test
+    public void shouldReturnCorrectValueWhitContinuousOperation() {
+        Calculator calculator = new Calculator();
+        calculator.process("1 2 3 4 5");
+        assertEquals("1 2 3 4 5", calculator.printNumberStack());
+
+        calculator.process("* * * * ");
+        assertEquals("120", calculator.printNumberStack());
     }
 }
