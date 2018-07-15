@@ -13,7 +13,7 @@ public class Processor {
     }
 
     private boolean isOperator(String inputString) {
-        String numberRegex = "(undo|clear|\\+|-|\\*|\\/|)";
+        String numberRegex = "(undo|clear|sqrt|\\+|-|\\*|\\/|)";
         return Pattern.matches(numberRegex, inputString);
     }
 

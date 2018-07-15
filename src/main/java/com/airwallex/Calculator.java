@@ -4,18 +4,15 @@ import com.airwallex.entity.Token;
 import com.airwallex.exception.CalculatorException;
 import com.airwallex.exception.InsufficientParamsException;
 import com.airwallex.exception.InvalidInputException;
-import com.sun.istack.internal.NotNull;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
-import java.util.Optional;
 import java.util.Stack;
 import java.util.stream.Collectors;
 
 public class Calculator {
     private final Processor processor;
     private Stack<Token> numberStack = new Stack<>();
-    private Stack<Token> operatorStack = new Stack<>();
     private Stack<Step> cachedSteps = new Stack<>();
     private int currentIndex = 0;
 
@@ -34,8 +31,6 @@ public class Calculator {
                 if(token != null) {
                     if(token.getType().equals("Number")) {
                         numberStack.push(token);
-                    } else if(token.getType().equals("Operation")) {
-                        operatorStack.push(token);
                     }
                     token.execute(numberStack, cachedSteps);
                 }

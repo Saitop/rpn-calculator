@@ -14,5 +14,6 @@ public class ClearToken extends Token {
     @Override
     public void execute(Stack<Token> tokens, Stack<Step> cachedNumbers) throws CalculatorException {
         tokens.clear();
+        cachedNumbers.clear();
     }
 }
