@@ -18,9 +18,11 @@ public class SquareRootToken extends Token {
         if (tokens.size() < 1) {
             throw new InsufficientParamsException();
         }
+
         final Token square = tokens.pop();
-        final Double result = sqrt(Double.valueOf(square.getValue()));
-        tokens.push(new NumberToken(result.toString()));
+        final Double root = sqrt(Double.valueOf(square.getValue()));
+
+        tokens.push(new NumberToken(root.toString()));
         final Step step = new Step(Collections.singletonList(square), this);
         cachedSteps.push(step);
     }

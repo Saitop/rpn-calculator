@@ -23,9 +23,9 @@ public class DivisionToken extends Token {
 
             final Token divisor = tokens.pop();
             final Token dividend = tokens.pop();
-            final Double result = Double.valueOf(dividend.getValue()) / Double.valueOf(divisor.getValue());
+            final Double quotient = Double.valueOf(dividend.getValue()) / Double.valueOf(divisor.getValue());
 
-            tokens.push(new NumberToken(result.toString()));
+            tokens.push(new NumberToken(quotient.toString()));
             final Step step = new Step(Arrays.asList(dividend, divisor), this);
             cachedSteps.push(step);
         }

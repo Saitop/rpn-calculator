@@ -17,10 +17,12 @@ public class MultiplicationToken extends Token {
         if (tokens.size() < 2) {
             throw new InsufficientParamsException();
         }
+
         Token multiplicand = tokens.pop();
         Token multiplier = tokens.pop();
-        final Double result = Double.valueOf(multiplier.getValue()) * Double.valueOf(multiplicand.getValue());
-        tokens.push(new NumberToken(result.toString()));
+        final Double product = Double.valueOf(multiplier.getValue()) * Double.valueOf(multiplicand.getValue());
+
+        tokens.push(new NumberToken(product.toString()));
         final Step step = new Step(Arrays.asList(multiplier, multiplicand), this);
         cachedSteps.push(step);
     }

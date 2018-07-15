@@ -16,10 +16,12 @@ public class SubtractionToken extends Token {
         if (tokens.size() < 2) {
             throw new InsufficientParamsException();
         }
+
         final Token subtrahend = tokens.pop();
         final Token minuend = tokens.pop();
-        final Double result = Double.valueOf(minuend.getValue()) - Double.valueOf(subtrahend.getValue());
-        tokens.push(new NumberToken(result.toString()));
+        final Double difference = Double.valueOf(minuend.getValue()) - Double.valueOf(subtrahend.getValue());
+
+        tokens.push(new NumberToken(difference.toString()));
         final Step step = new Step(Arrays.asList(minuend, subtrahend), this);
         cachedSteps.push(step);
     }
