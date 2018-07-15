@@ -5,7 +5,6 @@ import com.airwallex.exception.CalculatorException;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
-import java.util.List;
 import java.util.Stack;
 import java.util.stream.Collectors;
 
@@ -22,6 +21,7 @@ public class Calculator {
 
     public void process(String input) throws CalculatorException {
         String[] inputStrings = input.split("\\s+");
+        currentIndex = 0;
         for (String inputString : inputStrings) {
             currentIndex += inputString.length();
             String trimmedString = inputString.trim();
