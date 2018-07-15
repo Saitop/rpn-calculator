@@ -162,4 +162,12 @@ public class CalculatorTest {
         Calculator calculator = new Calculator();
         calculator.process("undo");
     }
+
+    @Test
+    public void shouldReturnSqrtWarningWithCorrectOperationInputPositionWhenSqrtEmptyStack() throws CalculatorException {
+        expectedException.expect(CalculatorException.class);
+        expectedException.expectMessage("operator sqrt (position: 1): insufficient parameters");
+        Calculator calculator = new Calculator();
+        calculator.process("sqrt");
+    }
 }

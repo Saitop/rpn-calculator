@@ -14,7 +14,6 @@ public class Calculator {
     private final Processor processor;
     private Stack<Token> numberStack = new Stack<>();
     private Stack<Step> cachedSteps = new Stack<>();
-    private int currentIndex = 0;
 
     public Calculator() {
         this.processor = new Processor();
@@ -22,7 +21,7 @@ public class Calculator {
 
     public void process(String input) throws CalculatorException {
         String[] inputStrings = input.split("\\s+");
-        currentIndex = 0;
+        int currentIndex = 0;
         for (String inputString : inputStrings) {
             currentIndex += inputString.length();
             Token token = null;
@@ -37,6 +36,9 @@ public class Calculator {
             } catch (InvalidInputException e) {
                 throw new CalculatorException(String.format("Invalid input: %s", inputString));
             } catch (InsufficientParamsException e) {
+                if(token.getValue().equals("sqrt")) {
+                    currentIndex -= 3;
+                }
                 throw new CalculatorException(String.format("operator %s (position: %d): insufficient parameters",
                         token.getValue(), currentIndex));
             }
