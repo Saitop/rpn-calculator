@@ -3,6 +3,8 @@
 Written by Hanxian Lin
 
 ## usage:
+below command should be run at project root diretory
+
 test:
 ```
 ./gradlew test
@@ -14,7 +16,7 @@ build project:
 ```
 
 
-to run a jar
+to run program as jar
 ```
 ./gradlew build
 
