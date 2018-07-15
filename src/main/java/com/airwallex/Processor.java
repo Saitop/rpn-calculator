@@ -7,23 +7,23 @@ import java.util.regex.Pattern;
 
 public class Processor {
 
-    public boolean isNumber(String inputString) {
+    boolean isNumber(String inputString) {
         String numberRegex = "(\\+|-)?\\d+(\\.\\d+)?";
         return Pattern.matches(numberRegex, inputString);
     }
 
-    private boolean isOperator(String inputString) {
+    boolean isValidOperator(String inputString) {
         String numberRegex = "(undo|clear|sqrt|\\+|-|\\*|\\/|)";
         return Pattern.matches(numberRegex, inputString);
     }
 
-    private boolean isSpaceOrEnter(String inputString) {
-        String numberRegex = "(\\s.+|\n)";
+    boolean isSpaceOrEnter(String inputString) {
+        String numberRegex = "(\\s+)?|\n";
         return Pattern.matches(numberRegex, inputString);
     }
 
     public Token createToken(String inputString) throws InvalidInputException {
-        if (!isNumber(inputString) && !isOperator(inputString) && !isSpaceOrEnter(inputString)) {
+        if (!isNumber(inputString) && !isValidOperator(inputString) && !isSpaceOrEnter(inputString)) {
             throw new InvalidInputException();
         }
         if (isNumber(inputString)) {
