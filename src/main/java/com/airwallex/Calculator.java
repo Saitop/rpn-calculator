@@ -4,9 +4,11 @@ import com.airwallex.entity.Token;
 import com.airwallex.exception.CalculatorException;
 import com.airwallex.exception.InsufficientParamsException;
 import com.airwallex.exception.InvalidInputException;
+import com.sun.istack.internal.NotNull;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.util.Optional;
 import java.util.Stack;
 import java.util.stream.Collectors;
 
@@ -26,21 +28,22 @@ public class Calculator {
         currentIndex = 0;
         for (String inputString : inputStrings) {
             currentIndex += inputString.length();
-            String trimmedString = inputString.trim();
             Token token = null;
             try {
-                token = processor.createToken(trimmedString);
-                if(token.getType().equals("Number")) {
-                    numberStack.push(token);
-                } else if(token.getType().equals("Operation")) {
-                    operatorStack.push(token);
+                token = processor.createToken(inputString.trim());
+                if(token != null) {
+                    if(token.getType().equals("Number")) {
+                        numberStack.push(token);
+                    } else if(token.getType().equals("Operation")) {
+                        operatorStack.push(token);
+                    }
+                    token.execute(numberStack, cachedSteps);
                 }
-                token.execute(numberStack, cachedSteps);
+            } catch (InvalidInputException e) {
+                throw new CalculatorException(String.format("Invalid input: %s", inputString));
             } catch (InsufficientParamsException e) {
                 throw new CalculatorException(String.format("operator %s (position: %d): insufficient parameters",
                         token.getValue(), currentIndex));
-            } catch (InvalidInputException e) {
-                throw new CalculatorException(String.format("Invalid input: %s", trimmedString));
             }
             currentIndex += 1;
         }
