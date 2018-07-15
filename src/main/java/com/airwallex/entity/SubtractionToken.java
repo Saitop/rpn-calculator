@@ -12,15 +12,15 @@ public class SubtractionToken extends Token {
     }
 
     @Override
-    public void execute(Stack<Token> tokens, Stack<Step> cachedNumbers) throws InsufficientParamsException {
+    public void execute(Stack<Token> tokens, Stack<Step> cachedSteps) throws InsufficientParamsException {
         if (tokens.size() < 2) {
             throw new InsufficientParamsException();
         }
-        final Token secondNumber = tokens.pop();
-        final Token firstNumber = tokens.pop();
-        final Double result = Double.valueOf(firstNumber.getValue()) - Double.valueOf(secondNumber.getValue());
+        final Token subtrahend = tokens.pop();
+        final Token minuend = tokens.pop();
+        final Double result = Double.valueOf(minuend.getValue()) - Double.valueOf(subtrahend.getValue());
         tokens.push(new NumberToken(result.toString()));
-        final Step step = new Step(Arrays.asList(firstNumber, secondNumber), this);
-        cachedNumbers.push(step);
+        final Step step = new Step(Arrays.asList(minuend, subtrahend), this);
+        cachedSteps.push(step);
     }
 }

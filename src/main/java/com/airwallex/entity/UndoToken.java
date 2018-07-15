@@ -11,9 +11,9 @@ public class UndoToken extends Token {
     }
 
     @Override
-    public void execute(Stack<Token> tokens, Stack<Step> cachedNumbers) {
+    public void execute(Stack<Token> tokens, Stack<Step> cachedSteps) {
         tokens.pop();
-        final Step step = cachedNumbers.pop();
+        final Step step = cachedSteps.pop();
         tokens.addAll(step.getNumbers());
     }
 }

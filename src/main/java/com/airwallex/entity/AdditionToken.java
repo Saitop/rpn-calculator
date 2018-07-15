@@ -13,15 +13,15 @@ public class AdditionToken extends Token {
     }
 
     @Override
-    public void execute(Stack<Token> tokens, Stack<Step> cachedNumbers) throws InsufficientParamsException {
+    public void execute(Stack<Token> tokens, Stack<Step> cachedSteps) throws InsufficientParamsException {
         if (tokens.size() < 2) {
             throw new InsufficientParamsException();
         }
-        final Token secondNumber = tokens.pop();
-        final Token firstNumber = tokens.pop();
-        final Double result = Double.valueOf(firstNumber.getValue()) + Double.valueOf(secondNumber.getValue());
+        final Token addend = tokens.pop();
+        final Token augend = tokens.pop();
+        final Double result = Double.valueOf(augend.getValue()) + Double.valueOf(addend.getValue());
         tokens.push(new NumberToken(result.toString()));
-        final Step step = new Step(Arrays.asList(firstNumber, secondNumber), this);
-        cachedNumbers.push(step);
+        final Step step = new Step(Arrays.asList(augend, addend), this);
+        cachedSteps.push(step);
     }
 }

@@ -13,19 +13,19 @@ public class DivisionToken extends Token {
     }
 
     @Override
-    public void execute(Stack<Token> tokens, Stack<Step> cachedNumbers) throws CalculatorException {
+    public void execute(Stack<Token> tokens, Stack<Step> cachedSteps) throws CalculatorException {
         if (tokens.size() < 2) {
             throw new InsufficientParamsException();
         }
         if ("0".equals(tokens.lastElement().getValue())) {
             throw new CalculatorException("Cannot divide by 0.");
         } else {
-            final Token secondNumber = tokens.pop();
-            final Token firstNumber = tokens.pop();
-            final Double result = Double.valueOf(firstNumber.getValue()) / Double.valueOf(secondNumber.getValue());
+            final Token divisor = tokens.pop();
+            final Token dividend = tokens.pop();
+            final Double result = Double.valueOf(dividend.getValue()) / Double.valueOf(divisor.getValue());
             tokens.push(new NumberToken(result.toString()));
-            final Step step = new Step(Arrays.asList(firstNumber, secondNumber), this);
-            cachedNumbers.push(step);
+            final Step step = new Step(Arrays.asList(dividend, divisor), this);
+            cachedSteps.push(step);
         }
     }
 }

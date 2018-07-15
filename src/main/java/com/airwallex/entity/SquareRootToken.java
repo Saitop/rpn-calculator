@@ -3,7 +3,7 @@ package com.airwallex.entity;
 import com.airwallex.Step;
 import com.airwallex.exception.InsufficientParamsException;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.Stack;
 
 import static java.lang.Math.sqrt;
@@ -14,14 +14,14 @@ public class SquareRootToken extends Token {
     }
 
     @Override
-    public void execute(Stack<Token> tokens, Stack<Step> cachedNumbers) throws InsufficientParamsException {
+    public void execute(Stack<Token> tokens, Stack<Step> cachedSteps) throws InsufficientParamsException {
         if (tokens.size() < 1) {
             throw new InsufficientParamsException();
         }
-        final Token firstNumber = tokens.pop();
-        final Double result = sqrt(Double.valueOf(firstNumber.getValue()));
+        final Token square = tokens.pop();
+        final Double result = sqrt(Double.valueOf(square.getValue()));
         tokens.push(new NumberToken(result.toString()));
-        final Step step = new Step(Arrays.asList(firstNumber), this);
-        cachedNumbers.push(step);
+        final Step step = new Step(Collections.singletonList(square), this);
+        cachedSteps.push(step);
     }
 }
