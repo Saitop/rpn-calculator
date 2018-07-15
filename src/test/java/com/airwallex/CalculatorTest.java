@@ -1,12 +1,11 @@
 package com.airwallex;
 
 import com.airwallex.exception.CalculatorException;
-import com.airwallex.exception.InvalidInputException;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class CalculatorTest {
     @Rule
@@ -154,5 +153,13 @@ public class CalculatorTest {
         Calculator calculator = new Calculator();
         calculator.process("8 -9 +2 0 + + + ");
         assertEquals("1", calculator.printNumberStack());
+    }
+
+    @Test
+    public void shouldReturnWarningWhenUndoAndEmptyStack() throws CalculatorException {
+        expectedException.expect(CalculatorException.class);
+        expectedException.expectMessage("Stack is empty, please do not perform 'undo'");
+        Calculator calculator = new Calculator();
+        calculator.process("undo");
     }
 }
