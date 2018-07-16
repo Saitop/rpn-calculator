@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class Calculator {
     private final Processor processor;
     private Stack<Token> numberStack = new Stack<>();
-    private Stack<Step> cachedSteps = new Stack<>();
+    private Stack<Operation> cachedOperations = new Stack<>();
 
     public Calculator() {
         this.processor = new Processor();
@@ -31,7 +31,7 @@ public class Calculator {
                     if(token.getType().equals("Number")) {
                         numberStack.push(token);
                     }
-                    token.execute(numberStack, cachedSteps);
+                    token.execute(numberStack, cachedOperations);
                 }
             } catch (InvalidInputException e) {
                 throw new CalculatorException(String.format("Invalid input: %s", inputString));

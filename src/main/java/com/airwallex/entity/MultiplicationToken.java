@@ -1,6 +1,6 @@
 package com.airwallex.entity;
 
-import com.airwallex.Step;
+import com.airwallex.Operation;
 import com.airwallex.exception.InsufficientParamsException;
 
 import java.util.Arrays;
@@ -13,7 +13,7 @@ public class MultiplicationToken extends Token {
     }
 
     @Override
-    public void execute(Stack<Token> tokens, Stack<Step> cachedSteps) throws InsufficientParamsException {
+    public void execute(Stack<Token> tokens, Stack<Operation> cachedOperations) throws InsufficientParamsException {
         if (tokens.size() < 2) {
             throw new InsufficientParamsException();
         }
@@ -23,7 +23,7 @@ public class MultiplicationToken extends Token {
         final Double product = Double.valueOf(multiplier.getValue()) * Double.valueOf(multiplicand.getValue());
 
         tokens.push(new NumberToken(product.toString()));
-        final Step step = new Step(Arrays.asList(multiplier, multiplicand), this);
-        cachedSteps.push(step);
+        final Operation operation = new Operation(Arrays.asList(multiplier, multiplicand), this);
+        cachedOperations.push(operation);
     }
 }

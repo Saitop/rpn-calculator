@@ -4,11 +4,11 @@ import com.airwallex.entity.Token;
 
 import java.util.List;
 
-public class Step {
+public class Operation {
     private List<Token> numbers;
     private Token operator;
 
-    public Step(List<Token> numbers, Token operator) {
+    public Operation(List<Token> numbers, Token operator) {
         this.numbers = numbers;
         this.operator = operator;
     }

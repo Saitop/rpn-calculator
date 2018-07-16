@@ -1,6 +1,6 @@
 package com.airwallex.entity;
 
-import com.airwallex.Step;
+import com.airwallex.Operation;
 import com.airwallex.exception.InsufficientParamsException;
 
 import java.util.Arrays;
@@ -12,7 +12,7 @@ public class SubtractionToken extends Token {
     }
 
     @Override
-    public void execute(Stack<Token> tokens, Stack<Step> cachedSteps) throws InsufficientParamsException {
+    public void execute(Stack<Token> tokens, Stack<Operation> cachedOperations) throws InsufficientParamsException {
         if (tokens.size() < 2) {
             throw new InsufficientParamsException();
         }
@@ -22,7 +22,7 @@ public class SubtractionToken extends Token {
         final Double difference = Double.valueOf(minuend.getValue()) - Double.valueOf(subtrahend.getValue());
 
         tokens.push(new NumberToken(difference.toString()));
-        final Step step = new Step(Arrays.asList(minuend, subtrahend), this);
-        cachedSteps.push(step);
+        final Operation operation = new Operation(Arrays.asList(minuend, subtrahend), this);
+        cachedOperations.push(operation);
     }
 }
