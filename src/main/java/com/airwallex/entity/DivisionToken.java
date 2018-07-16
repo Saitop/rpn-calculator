@@ -9,7 +9,7 @@ import java.util.Stack;
 
 public class DivisionToken extends Token {
     public DivisionToken() {
-        super("Operation", "/");
+        super("Operator", "/");
     }
 
     @Override

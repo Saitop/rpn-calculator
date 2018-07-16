@@ -7,7 +7,7 @@ import java.util.Stack;
 
 public class ClearToken extends Token {
     public ClearToken() {
-        super("Operation", "clear");
+        super("Operator", "clear");
 
     }
 

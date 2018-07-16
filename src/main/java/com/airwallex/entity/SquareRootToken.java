@@ -10,7 +10,7 @@ import static java.lang.Math.sqrt;
 
 public class SquareRootToken extends Token {
     public SquareRootToken() {
-        super("Operation", "sqrt");
+        super("Operator", "sqrt");
     }
 
     @Override

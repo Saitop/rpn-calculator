@@ -8,7 +8,7 @@ import java.util.Stack;
 public class UndoToken extends Token {
 
     public UndoToken() {
-        super("Operation", "undo");
+        super("Operator", "undo");
     }
 
     @Override

@@ -9,7 +9,7 @@ import java.util.Stack;
 public class MultiplicationToken extends Token {
 
     public MultiplicationToken() {
-        super("Operation", "*");
+        super("Operator", "*");
     }
 
     @Override

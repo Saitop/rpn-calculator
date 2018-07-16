@@ -8,7 +8,7 @@ import java.util.Stack;
 
 public class SubtractionToken extends Token {
     public SubtractionToken() {
-        super("Operation", "-");
+        super("Operator", "-");
     }
 
     @Override
