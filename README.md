@@ -1,4 +1,4 @@
-# Airwallex test: RPN Calculator
+# RPN Calculator
 
 Written by Hanxian Lin
 
