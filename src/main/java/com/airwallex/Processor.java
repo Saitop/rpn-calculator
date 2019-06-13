@@ -22,7 +22,7 @@ public class Processor {
         return Pattern.matches(numberRegex, inputString);
     }
 
-    public Token createToken(String inputString) throws InvalidInputException {
+    Token createToken(String inputString) throws InvalidInputException {
         if (!isNumber(inputString) && !isValidOperator(inputString) && !isSpaceOrEnter(inputString)) {
             throw new InvalidInputException();
         }
